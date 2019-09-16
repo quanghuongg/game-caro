@@ -1,29 +1,15 @@
 import React from "react";
-//
-// export default function Square({ onClick, value }) {
-//     return (
-//         <button className="square" onClick={onClick}>
-//             {value}
-//         </button>
-//     );
-// }
-class Square extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: null,
-        };
-    }
 
-    render() {
-        return (
-            <button
-                className="square"
-                onClick={() => this.props.onClick()}
-            >
-                {this.props.value}
-            </button>
-        );
-    }
+function Square(props) {
+    return (props.win) ? (
+        <button className="square square-highlight" onClick={props.onClick}>
+            {props.value}
+        </button>
+    ) : (
+        <button className="square" onClick={props.onClick}>
+            {props.value}
+        </button>
+    );
 }
+
 export default Square;

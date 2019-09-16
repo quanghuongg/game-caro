@@ -1,38 +1,10 @@
-import React, { useState } from "react";
-
-import Board from "./components/Board";
-import "./index.css";
+import React from "react";
+import Game from "./components/Game";
 
 export default function App() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
-
-  const handleClick = i => {
-    if (checkWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = xIsNext ? "X" : "O";
-    setSquares(squares);
-    setXIsNext(!xIsNext);
-  };
-
-  const winner = checkWinner(squares);
-
-  let status;
-  if (winner) {
-    status = "Winner: " + winner;
-  } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
-  }
-
   return (
-      <div className="game">
-        <div className="game-board">
-          <Board squares={squares} onClick={i => handleClick(i)} />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-        </div>
+      <div className="App">
+        <Game/>
       </div>
   );
 }
