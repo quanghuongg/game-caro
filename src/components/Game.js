@@ -30,6 +30,7 @@ class Game extends React.Component {
         this.handleChangeHeight = this.handleChangeHeight.bind(this);
         this.handleChangeWidth = this.handleChangeWidth.bind(this);
         this.sort = this.sort.bind(this);
+        this.resetGame = this.resetGame.bind(this);
     }
 
     jumpTo(step) {
@@ -63,6 +64,10 @@ class Game extends React.Component {
 
     sort() {
         this.setState({isDescending: !this.state.isDescending});
+    }
+
+    resetGame() {
+        console.log("rs game");
     }
 
     handleChangeWidth(e) {
@@ -137,15 +142,17 @@ class Game extends React.Component {
 
         let arrow = this.state.isDescending ? '↓' : '↑'
         return (
-            <div class="content">
+            <div className="content">
                 <div className="game-config">
-                    <span className="fixed-size">Chiều rộng:</span><input type="number" placeholder="Chiều rộng" disabled={true}
-                                                                          value={this.state.inputWidth}
-                                                                          onChange={this.handleChangeWidth}/>
+                    <span className="fixed-size">Width:</span><input type="number" placeholder="Width"
+                                                                     disabled={true}
+                                                                     value={this.state.inputWidth}
+                                                                     onChange={this.handleChangeWidth}/>
                     <br/>
-                    <span className="fixed-size">Chiều cao:</span><input type="number" placeholder="Chiều cao" disabled={true}
-                                                                         value={this.state.inputHeight}
-                                                                         onChange={this.handleChangeHeight}/>
+                    <span className="fixed-size">Height:</span><input type="number" placeholder="Height"
+                                                                      disabled={true}
+                                                                      value={this.state.inputHeight}
+                                                                      onChange={this.handleChangeHeight}/>
                 </div>
                 <div className="game">
                     <div className="game-board">
@@ -156,10 +163,10 @@ class Game extends React.Component {
                         />
                     </div>
                     <div className="game-info">
-                        <div>
-                            <button onClick={this.sort}>Thứ tự bước {arrow}</button>
+                        <div style={{margin: 2}}>
+                            <button onClick={this.sort}>History {arrow}</button>
                         </div>
-                        <div>{status}</div>
+                        {winner ? <div style={{color: "red"}}>{status}</div> : <div>{status}</div>}
                         <ol>{moves}</ol>
                     </div>
                 </div>
