@@ -27,8 +27,6 @@ class Game extends React.Component {
             xIsNext: true,
             isDescending: true,
         };
-        this.handleChangeHeight = this.handleChangeHeight.bind(this);
-        this.handleChangeWidth = this.handleChangeWidth.bind(this);
         this.sort = this.sort.bind(this);
         this.resetGame = this.resetGame.bind(this);
     }
@@ -70,46 +68,6 @@ class Game extends React.Component {
         console.log("rs game");
     }
 
-    handleChangeWidth(e) {
-        const val = Number(e.target.value);
-        this.setState({inputWidth: val});
-        if (val >= minSize && val <= maxSize) {
-            let tmpArr = Array(this.state.height);
-            for (let i = 0; i < this.state.height; i++) {
-                tmpArr[i] = Array(val).fill(null);
-            }
-            this.setState({
-                width: val,
-                history: [{
-                    squares: tmpArr,
-                    location: null,
-                }],
-                stepNumber: 0,
-                xIsNext: true,
-            });
-        }
-    }
-
-    handleChangeHeight(e) {
-        const val = Number(e.target.value);
-        this.setState({inputHeight: val});
-        if (val >= minSize && val <= maxSize) {
-            let tmpArr = Array(val);
-            for (let i = 0; i < val; i++) {
-                tmpArr[i] = Array(this.state.width).fill(null);
-            }
-            this.setState({
-                height: Number(val),
-                history: [{
-                    squares: tmpArr,
-                    location: null,
-                }],
-                stepNumber: 0,
-                xIsNext: true,
-            });
-        }
-    }
-
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
@@ -147,12 +105,12 @@ class Game extends React.Component {
                     <span className="fixed-size">Width:</span><input type="number" placeholder="Width"
                                                                      disabled={true}
                                                                      value={this.state.inputWidth}
-                                                                     onChange={this.handleChangeWidth}/>
+                />
                     <br/>
                     <span className="fixed-size">Height:</span><input type="number" placeholder="Height"
                                                                       disabled={true}
                                                                       value={this.state.inputHeight}
-                                                                      onChange={this.handleChangeHeight}/>
+                />
                 </div>
                 <div className="game">
                     <div className="game-board">
