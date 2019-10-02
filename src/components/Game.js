@@ -3,8 +3,6 @@ import Board from "./Board";
 
 const defaultWidth = 20;
 const defaultHeight = 20;
-const minSize = 5;
-const maxSize = 25;
 const nSquareToWin = 5;
 
 class Game extends React.Component {

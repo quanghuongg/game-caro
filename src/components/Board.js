@@ -13,7 +13,7 @@ class Board extends React.Component {
         );
     }
 
-    render() {
+    render(){
         let board;
         board = this.props.squares.map((row, idx) => {
             let k = "r" + idx;
