@@ -1,15 +1,20 @@
-import React from "react";
+import React from 'react'
 
 function Square(props) {
-    return (props.win) ? (
-        <button className="square square-highlight" onClick={props.onClick}>
-            {props.value}
+    const { win, onClick, value } = props
+    return win ? (
+        <button
+            type="submit"
+            className="square square-highlight"
+            onClick={onClick}
+        >
+            {value}
         </button>
     ) : (
-        <button className="square" onClick={props.onClick}>
-            {props.value}
+        <button type="submit" className="square" onClick={onClick}>
+            {value}
         </button>
-    );
+    )
 }
 
-export default Square;
+export default Square

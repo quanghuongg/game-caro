@@ -1,34 +1,36 @@
-import Game from "./Game";
-import React from "react";
+import React from 'react'
+import Game from './Game'
 
 class Caro extends React.Component {
     constructor(props) {
-        super(props);
-        this.newGame = this.newGame.bind(this);
+        super(props)
+        this.newGame = this.newGame.bind(this)
         this.state = {
-            game: () => <Game/>
-        };
+            game: () => <Game />
+        }
     }
 
     newGame() {
         this.setState({
-            game: () => <Game/>
-        });
+            game: () => <Game />
+        })
     }
 
     render() {
-        const ActiveGame = this.state.game;
+        const { game } = this.state
+        const ActiveGame = game
         return (
             <div>
                 <div className="btn-rs-game">
-                    <button onClick={this.newGame}>RESET GAME</button>
+                    <button type="submit" onClick={this.newGame}>
+                        RESET GAME
+                    </button>
                 </div>
 
-                <ActiveGame/>
-
+                <ActiveGame />
             </div>
-        );
+        )
     }
 }
 
-export default Caro;
+export default Caro
