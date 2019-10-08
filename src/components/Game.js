@@ -1,8 +1,6 @@
 import React from 'react'
 import Board from './Board'
-
-const defaultWidth = 20
-const defaultHeight = 20
+import {connect} from 'react-redux';
 const nSquareToWin = 5
 function calculateWinner(squares) {
     let win
@@ -84,13 +82,11 @@ function calculateWinner(squares) {
 class Game extends React.Component {
     constructor(props) {
         super(props)
-        const tmpArr = Array(defaultHeight)
-        for (let i = 0; i < defaultHeight; i++) {
-            tmpArr[i] = Array(defaultWidth).fill(null)
+        const tmpArr = Array(20)
+        for (let i = 0; i < 20; i++) {
+            tmpArr[i] = Array(20).fill(null)
         }
         this.state = {
-            inputWidth: defaultWidth,
-            inputHeight: defaultHeight,
             history: [
                 {
                     squares: tmpArr,
@@ -147,8 +143,6 @@ class Game extends React.Component {
             stepNumber,
             isDescending,
             xIsNext,
-            inputWidth,
-            inputHeight
         } = this.state
         const current = history[stepNumber]
         const winner = calculateWinner(current.squares)
@@ -192,21 +186,6 @@ class Game extends React.Component {
         return (
             <div className="content">
                 <div className="game-config">
-                    <span className="fixed-size">Width:</span>
-                    <input
-                        type="number"
-                        placeholder="Width"
-                        disabled
-                        value={inputWidth}
-                    />
-                    <br />
-                    <span className="fixed-size">Height:</span>
-                    <input
-                        type="number"
-                        placeholder="Height"
-                        disabled
-                        value={inputHeight}
-                    />
                 </div>
                 <div className="game">
                     <div className="game-board">
@@ -235,4 +214,11 @@ class Game extends React.Component {
     }
 }
 
-export default Game
+// const  mapStateToProps  =(state)=>{
+//     return {
+//         game : state.game,
+//     }
+// }
+//
+// export default connect(mapStateToProps,null)(Game)
+export default Game;
