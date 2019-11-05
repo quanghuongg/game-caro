@@ -1,12 +1,12 @@
 import React from 'react'
 import Game from './Game'
-
+import { Button } from 'react-bootstrap'
 class Caro extends React.Component {
     constructor(props) {
         super(props)
         this.newGame = this.newGame.bind(this)
         this.state = {
-            game: () => <Game />
+            game: () => <Game history={this.props.history}/>
         }
     }
 
@@ -22,9 +22,9 @@ class Caro extends React.Component {
         return (
             <div>
                 <div className="btn-rs-game">
-                    <button type="submit" onClick={this.newGame}>
+                    <Button align="center" variant="light" type="submit" onClick={this.newGame}>
                         RESET GAME
-                    </button>
+                    </Button>
                 </div>
 
                 <ActiveGame />
