@@ -62,7 +62,7 @@ class Profile extends React.Component {
                                 <input className="col-md-9 form-control" type="text" readOnly value={this.userInfo.username}/>
                         </div>
                         <div className="row mt-2 w-100">
-                            <div className="col-md-3">Name</div>
+                            <div className="col-md-3">Display Name</div>
                             <input className="col-md-9 form-control" type="text" name="name" value={this.state.name} onChange={(e)=>{this.handleChange(e)}}/>
                         </div>
                         <div className="row mt-2 w-100">
@@ -91,7 +91,7 @@ class Profile extends React.Component {
             console.log(this.state);
             $.ajax({
                 method: 'POST',
-                url: "http://localhost:3001/update-info",
+                url: "https://rest-api-jwt.herokuapp.com/user/update-info",
                 beforeSend: function(request){
                     request.setRequestHeader("Authorization","Bearer "+localStorage.getItem("token"));
                 },
@@ -135,7 +135,7 @@ class Profile extends React.Component {
         var me = this;
         let formData = new FormData();
         formData.append("avatar",this.state.fileUpload);
-        axios.post('http://localhost:3001/update-image',formData,{
+        axios.post('https://rest-api-jwt.herokuapp.com/user/update-image',formData,{
             headers: {
               Authorization: 'Bearer ' + localStorage.getItem("token")
             }}).then((response)=>{

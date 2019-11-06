@@ -1,5 +1,4 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap'
 import $ from 'jquery';
 import {connect} from 'react-redux';
 
@@ -7,13 +6,13 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username : "",
+            username: "",
             password: "",
             isLogged: false
         };
     }
 
-    loginClick(e){
+    loginClick(e) {
         var me = this;
         e.target.disabled = true;
         // Call API
@@ -24,15 +23,16 @@ class Login extends React.Component {
                 "username": this.state.username,
                 "password": this.state.password
             },
-            success: function(res){
+            success: function (res) {
                 alert(res.status);
                 me.props.dispatch({
                     type: "Logged"
                 });
                 localStorage.setItem("username", me.state.username);
+                localStorage.setItem("token", me.state.token)
                 me.props.history.push('/');
             },
-            error: function(err){
+            error: function (err) {
                 alert(err.responseJSON.Info);
                 window.location.reload();
                 return;
@@ -40,7 +40,7 @@ class Login extends React.Component {
         });
     }
 
-    handleChange(e){
+    handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -48,20 +48,32 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <h4>Login</h4>
-                <div className="form-login">
-                    <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" placeholder="Enter username" required  value={this.state.email} name="username" onChange={(e)=>{this.handleChange(e)}}/>
-                        </Form.Group>
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" required value={this.state.password} name="password" onChange={(e)=>{this.handleChange(e)}}/>
-                        </Form.Group>
-                        <Button  variant="success" type="button" onClick={(e)=>{this.loginClick(e)}}>Login</Button>
-                    </Form>
+            <div className="container">
+                <div className="card card-login mx-auto mt-5">
+                    <div className="card-header">ĐĂNG NHẬP</div>
+                    <div className="card-body">
+                        <form>
+                            <div className="form-group">
+                                <div className="form-label-group">
+                                    <input type="text" id="inputAccount" className="form-control"
+                                           placeholder="Nhập tài khoản" required="required" autoFocus={true}
+                                           autoComplete="true"
+                                           value={this.state.email} name="username" onChange={(e)=>{this.handleChange(e)}}/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="form-label-group">
+                                    <input className="form-control"
+                                           placeholder="Nhập mật khẩu" required="required" type="password"
+                                           autoComplete="true"
+                                           value={this.state.password}
+                                           name="password" onChange={(e)=>{this.handleChange(e)}}/>
+                                </div>
+                            </div>
+                            <a className="btn btn-primary btn-block"
+                               onClick={(e)=>{this.loginClick(e)}}>ĐĂNG NHẬP</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         );
